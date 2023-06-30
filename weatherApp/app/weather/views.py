@@ -16,6 +16,23 @@ def get_html_content(location_data):
     html_content = session.get(f'https://www.google.com/search?q=weather+{city}').text
     return html_content
 
+def extract_weather_data(soup):
+    weather_data = {}
+    region_element = soup.find("span", attrs={"class": "BNeawe tAd8D AP7Wnd"})
+    weather_data['region'] = region_element.text if region_element else ''
+
+    temp_now_element = soup.find("div", attrs={"class": "BNeawe iBp4i AP7Wnd"})
+    weather_data['temp_now'] = temp_now_element.text if temp_now_element else ''
+
+    dayhour_element = soup.find("div", attrs={"class": "BNeawe tAd8D AP7Wnd"})
+    if dayhour_element:
+        weather_data['dayhour'], weather_data['weather_now'] = dayhour_element.text.split('\n')
+    else:
+        weather_data['dayhour'] = ''
+        weather_data['weather_now'] = ''
+
+    return weather_data
+
 def get_current_loc_info():
     ip = requests.get('https://api.ipify.org?format=json')# url for the ip api
     ip_data = json.loads(ip.text)

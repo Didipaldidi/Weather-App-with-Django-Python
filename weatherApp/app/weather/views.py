@@ -54,10 +54,9 @@ def add_city(request):
         form = CityForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('city_list')  # Redirect to a success page or a different view
+            return redirect('city_list')
     else:
         form = CityForm()
-    
     return render(request, 'weather/add_city.html', {'form': form})
 
 def delete_city(request):

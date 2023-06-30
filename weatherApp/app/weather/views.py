@@ -65,19 +65,24 @@ def delete_city(request):
         if form.is_valid():
             city_name = form.cleaned_data['name']
             City.objects.filter(name=city_name).delete()
-            return redirect('city_list')  # Redirect to the index view after deleting the city
+            return redirect('city_list')
     else:
         form = DeleteCityForm()
-
     return render(request, 'weather/delete_city.html', {'form': form})
 
 def index(request):
-    current_loc = get_current_loc_info() # contains the weather inforamtion of current location
-    cities = City.objects.all()# return all the cities in the database
+    current_loc = get_current_loc_info()
+    cities = City.objects.all()
     weathers_data = []
 
     for city in cities:
         city_weather = get_weather_db(city.name)
         weathers_data.append(city_weather)
-    
-    return render(request, 'weather/index.html', {'location_data': current_loc[0], 'weather_data': current_loc[1], 'ls_of_weather': weathers_data,},) #returns the index.html template 
+
+    context = {
+        'location_data': current_loc[0],
+        'weather_data': current_loc[1],
+        'ls_of_weather': weathers_data,
+    }
+
+    return render(request, 'weather/index.html', context) #returns the index.html template 

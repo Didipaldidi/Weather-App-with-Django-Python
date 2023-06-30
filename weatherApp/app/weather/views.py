@@ -34,17 +34,23 @@ def extract_weather_data(soup):
     return weather_data
 
 def get_current_loc_info():
-    ip = requests.get('https://api.ipify.org?format=json')
-    ip_data = json.loads(ip.text)
-    res = requests.get('http://ip-api.com/json/' + ip_data["ip"])
-    location_data = json.loads(res.text)
-    html_content = get_html_content(location_data)
-    soup = BeautifulSoup(html_content, 'html.parser')
-    weather_data = extract_weather_data(soup)
-    return location_data, weather_data
+    try:
+        ip = requests.get('https://api.ipify.org?format=json')
+        ip_data = ip.json()
+        res = requests.get('http://ip-api.com/json/' + ip_data["ip"])
+        location_data = res.json()
+        html_content = get_html_content(location_data)
+        soup = BeautifulSoup(html_content, 'html.parser')
+        weather_data = extract_weather_data(soup)
+        return location_data, weather_data
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred during API request: {str(e)}")
+    except (json.JSONDecodeError, KeyError) as e:
+        print(f"An error occurred while parsing JSON: {str(e)}")
 
 def get_weather_db(city):
-    html_content = get_html_content(city)
+    location_data = {'city': city}
+    html_content = get_html_content(location_data)
     soup = BeautifulSoup(html_content, 'html.parser')
     weather_data = extract_weather_data(soup)
     return weather_data

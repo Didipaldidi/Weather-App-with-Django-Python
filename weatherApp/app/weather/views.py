@@ -34,25 +34,14 @@ def extract_weather_data(soup):
     return weather_data
 
 def get_current_loc_info():
-    ip = requests.get('https://api.ipify.org?format=json')# url for the ip api
+    ip = requests.get('https://api.ipify.org?format=json')
     ip_data = json.loads(ip.text)
-    res = requests.get('http://ip-api.com/json/'+ip_data["ip"])# url for the geolocation api and pass the api address of the user
-    temp = res.text
-    location_data = json.loads(temp)# convert json to python dict
-
-    weather_data = None #use to store the weather information
-
-    # fetch the weather from Google.
+    res = requests.get('http://ip-api.com/json/' + ip_data["ip"])
+    location_data = json.loads(res.text)
     html_content = get_html_content(location_data)
     soup = BeautifulSoup(html_content, 'html.parser')
-    weather_data = dict()
-    # extract region
-    weather_data['region'] = soup.find("span", attrs={"class": "BNeawe tAd8D AP7Wnd"}).text
-    # extract temperature now
-    weather_data['temp_now'] = soup.find("div", attrs={"class": "BNeawe iBp4i AP7Wnd"}).text
-    # get the day, hour and actual weather
-    weather_data['dayhour'], weather_data['weather_now'] = soup.find("div", attrs={"class": "BNeawe tAd8D AP7Wnd"}).text.split('\n')
-    return (location_data, weather_data)
+    weather_data = extract_weather_data(soup)
+    return location_data, weather_data
 
 def get_weather_db(city):
     USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"

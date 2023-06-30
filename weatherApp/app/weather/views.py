@@ -44,38 +44,9 @@ def get_current_loc_info():
     return location_data, weather_data
 
 def get_weather_db(city):
-    USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"
-    LANGUAGE = "en-US,en;q=0.5"
-    session = requests.Session()
-    session.headers['User-Agent'] = USER_AGENT
-    session.headers['Accept-Language'] = LANGUAGE
-    session.headers['Content-Language'] = LANGUAGE
-    html_content = session.get(f'https://www.google.com/search?q=weather+{city}').text #get the weather information from webscraping
-
-    weather_data = None
-
+    html_content = get_html_content(city)
     soup = BeautifulSoup(html_content, 'html.parser')
-    weather_data = dict()
-
-    region_element = soup.find("span", attrs={"class": "BNeawe tAd8D AP7Wnd"})
-    if region_element:
-        weather_data['region'] = region_element.text
-    else:
-        weather_data['region'] = ''
-
-    temp_now_element = soup.find("div", attrs={"class": "BNeawe iBp4i AP7Wnd"})
-    if temp_now_element:
-        weather_data['temp_now'] = temp_now_element.text
-    else:
-        weather_data['temp_now'] = ''
-
-    dayhour_element = soup.find("div", attrs={"class": "BNeawe tAd8D AP7Wnd"})
-    if dayhour_element:
-        weather_data['dayhour'], weather_data['weather_now'] = dayhour_element.text.split('\n')
-    else:
-        weather_data['dayhour'] = ''
-        weather_data['weather_now'] = ''
-
+    weather_data = extract_weather_data(soup)
     return weather_data
 
 def add_city(request):

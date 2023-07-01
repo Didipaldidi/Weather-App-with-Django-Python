@@ -14,58 +14,25 @@
                 <h1 class="title level-left">
                     What's the weather like?
                 </h1>
-                    <div class="media-content level-right">
-                        <div class="content">
-                            <p>
-                                <span class="title">{{ location_data.country }}, {{ weather_data.region }}</span>
-                                <br>
-                                <span class="subtitle">{{ weather_data.temp_now }}</span>
-                                <br> {{ weather_data.weather_now }}
-                                <br> {{ weather_data.dayhour }}
-                            </p>
-                        </div>
+                <div class="media-content level-right">
+                    <div class="content">
+                        <p>
+                            <span class="title">{{ location_data.country }}, {{ weather_data.region }}</span>
+                            <br>
+                            <span class="subtitle">{{ weather_data.temp_now }}</span>
+                            <br> {{ weather_data.weather_now }}
+                            <br> {{ weather_data.dayhour }}
+                        </p>
                     </div>
-            </div>
-        </div>
-    </section>
-    <section class="section has-background-black">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
-                    <!-- Add City Form -->
-                    <form method="POST" action="{% url 'add_city' %}">
-                        {% csrf_token %}
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <input class="input" type="text" name="name" placeholder="Enter city name">
-                            </div>
-                            <div class="control">
-                                <button class="button is-primary is-fullwidth">Add City</button>
-                            </div>
-                        </div>
-                    </form>
-    
-                    <!-- Delete City Form -->
-                    <form method="POST" action="{% url 'delete_city' %}">
-                        {% csrf_token %}
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <input class="input" type="text" name="name" placeholder="Enter city name">
-                            </div>
-                            <div class="control">
-                                <button class="button is-danger is-fullwidth">Delete City</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
     </section>
     <section class="section has-background-black">
         <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
-                    {% for weather in ls_of_weather %}
+            <div class="columns is-multiline">
+                {% for weather in ls_of_weather %}
+                <div class="column is-4">
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
@@ -85,8 +52,8 @@
                             </div>
                         </article>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
     </section>

@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    <title>User Registration</title>
+    <title>User Login</title>
 {% endblock %}
 
 {% block content %}
     <div class="card">
         <div class="title-wrapper">
-            <h1 class="title-text title">User Registration</h1>
+            <h1 class="title-text title">User Login</h1>
         </div>
         <div class="card-content form-wrapper">
             <form method="POST">
@@ -19,32 +19,20 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control">
-                        {{ form.email }}
-                    </div>
-                </div>
-                <div class="field">
                     <label class="label">Password</label>
                     <div class="control">
-                        {{ form.password1 }}
-                    </div>
-                </div>
-                <div class="field">
-                    <label class="label">Confirm Password</label>
-                    <div class="control">
-                        {{ form.password2 }}
+                        {{ form.password }}
                     </div>
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button class="button is-primary register-button" type="submit">Register</button>
+                        <button class="button is-primary register-button" type="submit">Login</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
     <div class="login-link">
-        <a href="{% url 'login' %}">Already have an account? Log in</a>
+        <a href="{% url 'register' %}">Don't have an account? Register</a>
     </div>
 {% endblock %}

@@ -11,39 +11,43 @@
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-half">
-                    <h1 class="title">User Registration</h1>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="field">
-                            <label class="label">Username</label>
-                            <div class="control">
-                                {{ form.username }}
-                            </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h1 class="title">User Registration</h1>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="field">
+                                    <label class="label">Username</label>
+                                    <div class="control">
+                                        {{ form.username }}
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Email</label>
+                                    <div class="control">
+                                        {{ form.email }}
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Password</label>
+                                    <div class="control">
+                                        {{ form.password1 }}
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Confirm Password</label>
+                                    <div class="control">
+                                        {{ form.password2 }}
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="control">
+                                        <button class="button is-primary" type="submit">Register</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="field">
-                            <label class="label">Email</label>
-                            <div class="control">
-                                {{ form.email }}
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Password</label>
-                            <div class="control">
-                                {{ form.password1 }}
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Confirm Password</label>
-                            <div class="control">
-                                {{ form.password2 }}
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="control">
-                                <button class="button is-primary" type="submit">Register</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

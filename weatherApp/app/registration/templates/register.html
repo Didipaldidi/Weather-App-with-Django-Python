@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.2/css/bulma.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .title-wrapper {
+            background-color: #3273dc;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .title-text {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .form-wrapper {
+            background-color: #90ee90;
+            padding: 1.5rem;
+            border-radius: 5px;
+        }
+
+        .register-button {
+            background-color: #3498db;
+            border-color: #3498db;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .register-button:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
     <section class="section">
@@ -12,8 +46,10 @@
             <div class="columns is-centered">
                 <div class="column is-half">
                     <div class="card">
-                        <div class="card-content">
-                            <h1 class="title">User Registration</h1>
+                        <div class="title-wrapper">
+                            <h1 class="title-text title">User Registration</h1>
+                        </div>
+                        <div class="card-content form-wrapper">
                             <form method="POST">
                                 {% csrf_token %}
                                 <div class="field">
@@ -42,7 +78,7 @@
                                 </div>
                                 <div class="field">
                                     <div class="control">
-                                        <button class="button is-primary" type="submit">Register</button>
+                                        <button class="button is-primary register-button" type="submit">Register</button>
                                     </div>
                                 </div>
                             </form>

@@ -1,11 +1,12 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
 class City(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)    
     name = models.CharField(max_length=25)
 
-    def __str__(self): #show the actual city name on the dashboard
+    def __str__(self):
         return self.name
 
-    class Meta: #show the plural of city as cities instead of citys
+    class Meta:
         verbose_name_plural = 'cities'

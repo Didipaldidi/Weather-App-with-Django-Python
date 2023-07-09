@@ -40,34 +40,63 @@
     </section>
     <section class="section custom-background">
         <div class="container">
-            <div class="columns is-multiline">
-                {% for weather in ls_of_weather %}
-                <div class="column is-4">
-                    <div class="box custom-box">
-                        <article class="media">
-                            <div class="media-left">
-                                <figure class="image is-50x50">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <div class="content">
-                                    <p>
-                                        <span class="title">{{ weather.region }}</span>
-                                        <br>
-                                        <span class="subtitle">{{ weather.temp_now }}</span>
-                                        <br> {{ weather.weather_now }}
-                                        <br> {{ weather.dayhour }}
-                                    </p>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
+            <div class="columns">
+                <div class="column">
+                    <form id="addCityForm">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="button is-success">Add City</button>
+                    </form>
                 </div>
-                {% endfor %}
+                <div class="column">
+                    <form id="deleteCityForm">
+                        {% csrf_token %}
+                        {{ delete_form.as_p }}
+                        <button type="submit" class="button is-danger">Delete City</button>
+                    </form>
+                </div>
+            </div>
+            <div id="weatherData">
+                {% include 'weather/weather_data.html' %}
             </div>
         </div>
     </section>
     <footer class="footer">
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Submit the add city form using AJAX
+            $('#addCityForm').submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+    
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "add_city" %}',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        // Update the weather data section with the new city
+                        $('#weatherData').html(response);
+                    }
+                });
+            });
+    
+            // Submit the delete city form using AJAX
+            $('#deleteCityForm').submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+    
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "delete_city" %}',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        // Update the weather data section after deleting the city
+                        $('#weatherData').html(response);
+                    }
+                });
+            });
+        });
+    </script>
+    
 </body>
 </html>

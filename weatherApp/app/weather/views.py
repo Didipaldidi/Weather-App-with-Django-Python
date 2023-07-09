@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup
 import requests, json
 from .models import City
+from django.contrib.auth.models import User
 from .forms import CityForm, DeleteCityForm
+from django.http import JsonResponse
 
 # Create your views here.
 def get_html_content(location_data):
@@ -59,11 +61,14 @@ def add_city(request):
     if request.method == 'POST':
         form = CityForm(request.POST)
         if form.is_valid():
-            form.save()
+            city = form.save(commit=False)
+            city.user = request.user
+            city.save()
             return redirect('city_list')
     else:
         form = CityForm()
     return render(request, 'weather/add_city.html', {'form': form})
+
 
 def delete_city(request):
     if request.method == 'POST':
@@ -78,7 +83,7 @@ def delete_city(request):
 
 def index(request):
     current_loc = get_current_loc_info()
-    cities = City.objects.all()
+    cities = City.objects.filter(user=request.user)
     weathers_data = []
 
     for city in cities:
@@ -89,6 +94,11 @@ def index(request):
         'location_data': current_loc[0],
         'weather_data': current_loc[1],
         'ls_of_weather': weathers_data,
+        'form': CityForm(),
+        'delete_form': DeleteCityForm(),
     }
 
-    return render(request, 'weather/index.html', context) #returns the index.html template 
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        return render(request, 'weather/weather_data.html', context) # Renders only the weather data section
+
+    return render(request, 'weather/index.html', context)

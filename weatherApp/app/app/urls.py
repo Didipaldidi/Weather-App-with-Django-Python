@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from registration.views import register
+from weather.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("registration.urls")),
-    path('', include("weather.urls")),
+    path('', register, name='landing_page'),
+    path('register/', include("registration.urls")),
+    path('weather/', include("weather.urls")),  # Include the weather app's URLs with a prefix
 ]

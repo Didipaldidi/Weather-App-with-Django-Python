@@ -1,0 +1,23 @@
+{% for weather in ls_of_weather %}
+<div class="column is-4">
+    <div class="box custom-box">
+        <article class="media">
+            <div class="media-left">
+                <figure class="image is-50x50">
+                </figure>
+            </div>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <span class="title">{{ weather.region }}</span>
+                        <br>
+                        <span class="subtitle">{{ weather.temp_now }}</span>
+                        <br> {{ weather.weather_now }}
+                        <br> {{ weather.dayhour }}
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+{% endfor %}

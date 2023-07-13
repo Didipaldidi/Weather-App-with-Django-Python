@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup
 import requests, json
-from .models import City
+from .models import City, WeatherForecast
 from django.contrib.auth.models import User
 from .forms import CityForm, DeleteCityForm
 from django.http import JsonResponse

@@ -32,6 +32,8 @@
                             <span class="subtitle">{{ weather_data.temp_now }}</span>
                             <br> {{ weather_data.weather_now }}
                             <br> {{ weather_data.dayhour }}
+                            <br>
+                            <a href="{% url 'hourly_temperatures' %}">View Hourly Temperatures</a>
                         </p>
                     </div>
                 </div>

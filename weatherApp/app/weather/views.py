@@ -32,8 +32,12 @@ def extract_weather_data(soup):
     else:
         weather_data['dayhour'] = ''
         weather_data['weather_now'] = ''
-
     return weather_data
+
+def hourly_temperatures(request):
+    weather_data = get_current_loc_info()[1]
+    hourly_temperatures = weather_data['hourly_temperatures']
+    return render(request, 'weather/details.html', {'hourly_temperatures': hourly_temperatures})
 
 def get_current_loc_info():
     try:

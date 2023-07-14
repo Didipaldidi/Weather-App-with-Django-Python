@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup
 import requests, json
-from .models import City, WeatherForecast
+from .models import City
 from django.contrib.auth.models import User
 from .forms import CityForm, DeleteCityForm
 from django.http import JsonResponse
@@ -32,12 +32,8 @@ def extract_weather_data(soup):
     else:
         weather_data['dayhour'] = ''
         weather_data['weather_now'] = ''
-    return weather_data
 
-def hourly_temperatures(request):
-    weather_data = get_current_loc_info()[1]
-    hourly_temperatures = weather_data['hourly_temperatures']
-    return render(request, 'weather/details.html', {'hourly_temperatures': hourly_temperatures})
+    return weather_data
 
 def get_current_loc_info():
     try:

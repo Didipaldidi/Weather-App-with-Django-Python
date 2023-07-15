@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Weather Details</title>
+    <title>Weather Forecast</title>
 </head>
 <body>
-    <h1>Weather Details for {{ weather_data.region }}</h1>
-    <p>Current Temperature: {{ weather_data.temp_now }}</p>
-    <p>Current Weather: {{ weather_data.weather_now }}</p>
-    <p>Precipitation: {{ weather_data.precipitation }}</p>
-    <p>Humidity: {{ weather_data.humidity }}</p>
-    <p>Wind: {{ weather_data.wind }}</p>
-    
-    <h2>Next Days</h2>
-    <ul>
-        {% for day in weather_data.next_days %}
-            <li>
-                <p>Day: {{ day.name }}</p>
-                <p>Weather: {{ day.weather }}</p>
-                <p>Max Temperature: {{ day.max_temp }}</p>
-                <p>Min Temperature: {{ day.min_temp }}</p>
-            </li>
-        {% endfor %}
-    </ul>
+    <h1>Weather Forecast for {{ city }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Weather</th>
+                <th>High Temperature</th>
+                <th>Low Temperature</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for forecast in weather_data %}
+            <tr>
+                <td>{{ forecast.day }}</td>
+                <td>{{ forecast.weather }}</td>
+                <td>{{ forecast.temp_high }}</td>
+                <td>{{ forecast.temp_low }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

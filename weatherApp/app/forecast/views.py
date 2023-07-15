@@ -17,30 +17,23 @@ def get_html_content(location_data):
 
 def get_weather_data(html_content):
     soup = bs(html_content, "html.parser")
-    result = {
-        'region': soup.find("div", attrs={"id": "wob_loc"}).text,
-        'temp_now': soup.find("span", attrs={"id": "wob_tm"}).text,
-        'dayhour': soup.find("div", attrs={"id": "wob_dts"}).text,
-        'weather_now': soup.find("span", attrs={"id": "wob_dc"}).text,
-        'precipitation': soup.find("span", attrs={"id": "wob_pp"}).text,
-        'humidity': soup.find("span", attrs={"id": "wob_hm"}).text,
-        'wind': soup.find("span", attrs={"id": "wob_ws"}).text,
-        'next_days': []
-    }
-    days = soup.find("div", attrs={"id": "wob_dp"})
-    for day in days.findAll("div", attrs={"class": "wob_df"}):
-        day_name = day.findAll("div")[0].attrs['aria-label']
-        weather = day.find("img").attrs["alt"]
-        temp = day.findAll("span", {"class": "wob_t"})
-        max_temp = temp[0].text
-        min_temp = temp[2].text
-        result['next_days'].append({
-            'name': day_name,
+    forecast_elems = soup.select('.tAd8D')
+
+    forecast_data = []
+    for elem in forecast_elems:
+        day = elem.select_one('.SUZt4c-d0F2t').text
+        weather = elem.select_one('.eIuuYe-tzA9Ye span').get('aria-label')
+        temp_high = elem.select_one('.wxData span:first-child').text
+        temp_low = elem.select_one('.wxData span:last-child').text
+
+        forecast_data.append({
+            'day': day,
             'weather': weather,
-            'max_temp': max_temp,
-            'min_temp': min_temp
+            'temp_high': temp_high,
+            'temp_low': temp_low
         })
-    return result
+
+    return forecast_data
 
 def details(request):
     location_data = {

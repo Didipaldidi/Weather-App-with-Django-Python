@@ -33,6 +33,9 @@
                             <br> {{ weather_data.weather_now }}
                             <br> {{ weather_data.dayhour }}
                             <br>
+                            <h2>Weather Details</h2>
+                            <!-- Link to the 'forecast_details' view in the forecast app -->
+                            <a href="{% url 'forecast_details' %}">View Forecast Details</a>
                         </p>
                     </div>
                 </div>

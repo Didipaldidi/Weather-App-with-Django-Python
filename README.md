@@ -9,6 +9,8 @@ Weather App is a Django web application that displays weather information for di
 - Fetch weather data from Google using web scraping.
 - Store city information in a PostgreSQL database.
 - Responsive UI design using Bulma CSS framework.
+- User Autherntication
+- Register and Login
 
 ## Prerequisites
 

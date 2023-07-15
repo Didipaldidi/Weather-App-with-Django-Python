@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hourly Temperatures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1 {
+            background-color: #209cee;
+            color: #fff;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #209cee;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e0e0e0;
+        }
+
+        tr:hover {
+            background-color: #d3d3d3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hourly Temperatures</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Hour</th>
+                <th>Temperature</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for temperature in hourly_temperatures %}
+            <tr>
+                <td>{{ temperature.hour }}</td>
+                <td>{{ temperature.temperature }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from registration.views import register
 from weather.views import index
+from forecast.views import details
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', register, name='landing_page'),
     path('register/', include("registration.urls")),
     path('weather/', include("weather.urls")),  # Include the weather app's URLs with a prefix
+    path('forecast/', details, name='forecast_details')
 ]

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Details</title>
+</head>
+<body>
+    <h1>Weather Details for {{ weather_data.region }}</h1>
+    <p>Current Temperature: {{ weather_data.temp_now }}</p>
+    <p>Current Weather: {{ weather_data.weather_now }}</p>
+    <p>Precipitation: {{ weather_data.precipitation }}</p>
+    <p>Humidity: {{ weather_data.humidity }}</p>
+    <p>Wind: {{ weather_data.wind }}</p>
+    
+    <h2>Next Days</h2>
+    <ul>
+        {% for day in weather_data.next_days %}
+            <li>
+                <p>Day: {{ day.name }}</p>
+                <p>Weather: {{ day.weather }}</p>
+                <p>Max Temperature: {{ day.max_temp }}</p>
+                <p>Min Temperature: {{ day.min_temp }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

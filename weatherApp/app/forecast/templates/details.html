@@ -4,26 +4,22 @@
     <title>Weather Forecast</title>
 </head>
 <body>
-    <h1>Weather Forecast for {{ city }}</h1>
+    <h1>Weather Forecast for {{ weather_data.0.city.name }}</h1>
     <table>
-        <thead>
-            <tr>
-                <th>Day</th>
-                <th>Weather</th>
-                <th>High Temperature</th>
-                <th>Low Temperature</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for forecast in weather_data %}
-            <tr>
-                <td>{{ forecast.day }}</td>
-                <td>{{ forecast.weather }}</td>
-                <td>{{ forecast.temp_high }}</td>
-                <td>{{ forecast.temp_low }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+        <tr>
+            <th>Date/Time</th>
+            <th>Temperature</th>
+            <th>Weather</th>
+            <th>Description</th>
+        </tr>
+        {% for forecast in weather_data %}        
+        <tr>
+            <td>{{ forecast.datetime }}</td>
+            <td>{{ forecast.temperature }} &#8451;</td>
+            <td>{{ forecast.weather }}</td>
+            <td>{{ forecast.description }}</td>
+        </tr>
+        {% endfor %}
     </table>
 </body>
 </html>

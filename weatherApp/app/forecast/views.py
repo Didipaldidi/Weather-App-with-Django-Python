@@ -2,48 +2,40 @@ from django.shortcuts import render
 from bs4 import BeautifulSoup as bs
 import requests
 
-# Create your views here.
-def get_html_content(location_data):
-    USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"
-    LANGUAGE = "en-US,en;q=0.5"
-    session = requests.Session()
-    session.headers['User-Agent'] = USER_AGENT
-    session.headers['Accept-Language'] = LANGUAGE
-    session.headers['Content-Language'] = LANGUAGE
-    city = location_data['city']
-    html_content = session.get(f'https://www.google.com/search?q=weather+{city}').text
-    return html_content
-
-
-def get_weather_data(html_content):
-    soup = bs(html_content, "html.parser")
-    forecast_elems = soup.select('.tAd8D')
-
-    forecast_data = []
-    for elem in forecast_elems:
-        day = elem.select_one('.SUZt4c-d0F2t').text
-        weather = elem.select_one('.eIuuYe-tzA9Ye span').get('aria-label')
-        temp_high = elem.select_one('.wxData span:first-child').text
-        temp_low = elem.select_one('.wxData span:last-child').text
-
-        forecast_data.append({
-            'day': day,
-            'weather': weather,
-            'temp_high': temp_high,
-            'temp_low': temp_low
-        })
-
+def get_weather_forecast(city, api_key):
+    base_url = "http://api.openweathermap.org/data/2.5/forecast"
+    params = {
+        "q": city,
+        "appid": api_key,
+        "units": "metric"
+    }
+    response = requests.get(base_url, params=params)
+    forecast_data = response.json()
     return forecast_data
 
 def details(request):
-    location_data = {
-        'city': 'New York',  # Replace 'YourCity' with the actual city name
-    }
-    html_content = get_html_content(location_data)
-    weather_data = get_weather_data(html_content)
+    city = "New York"  # Replace with the desired city name
+    api_key = ""  # Replace with your valid API key
+    forecast_data = get_weather_forecast(city, api_key)
+
+    # Extract the required data for the next 5 days
+    if "list" in forecast_data:
+        forecasts = forecast_data["list"][:40]  # 8 forecasts per day for 5 days
+    else:
+        forecasts = []
+
+    # Prepare the data for rendering in the template
+    weather_data = []
+    for forecast in forecasts:
+        weather_data.append({
+            "datetime": forecast["dt_txt"],
+            "temperature": forecast["main"]["temp"],
+            "weather": forecast["weather"][0]["main"],
+            "description": forecast["weather"][0]["description"]
+        })
 
     context = {
-        'weather_data': weather_data,
+        "weather_data": weather_data,
     }
 
     return render(request, 'details.html', context)

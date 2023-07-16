@@ -33,9 +33,8 @@
                             <br> {{ weather_data.weather_now }}
                             <br> {{ weather_data.dayhour }}
                             <br>
-                            <h2>Weather Details</h2>
-                            <!-- Link to the 'details' view -->
-                            <a href="{% url 'weather_details' %}">View Weather Details</a>
+                            <!-- Link to the 'details' view with the city name as a URL parameter -->
+                            <a href="{% url 'details' city_name=weather_data.region %}">View Weather Details</a>
                         </p>
                     </div>
                 </div>

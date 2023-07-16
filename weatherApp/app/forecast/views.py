@@ -15,6 +15,8 @@ def get_weather_forecast(city, api_key):
 
 def details(request, city_name):
     api_key = ""  # Replace with your valid API key
+    city_name = city_name.split(',')[0].strip()
+    print(city_name)
     forecast_data = get_weather_forecast(city_name, api_key)
 
     # Extract the required data for the next 5 days
@@ -32,7 +34,7 @@ def details(request, city_name):
             "weather": forecast["weather"][0]["main"],
             "description": forecast["weather"][0]["description"]
         })
-
+    print(weather_data)
     context = {
         "city": city_name,
         "weather_data": weather_data,

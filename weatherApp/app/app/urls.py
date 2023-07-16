@@ -25,5 +25,5 @@ urlpatterns = [
     path('', register, name='landing_page'),
     path('register/', include("registration.urls")),
     path('weather/', include("weather.urls")),  # Include the weather app's URLs with a prefix
-    path('forecast/', details, name='forecast_details')
+    path('forecast/', include('forecast.urls')),
 ]

@@ -14,7 +14,7 @@ def get_weather_forecast(city, api_key):
     return forecast_data
 
 def details(request, city_name):
-    api_key = "6e89ef50a3199ea4694b63da8e935363"  # Replace with your valid API key
+    api_key = ""  # Replace with your valid API key
     city_name = city_name.split(',')[0].strip()
     print(city_name)
     forecast_data = get_weather_forecast(city_name, api_key)

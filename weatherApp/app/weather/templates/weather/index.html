@@ -38,6 +38,10 @@
                         </p>
                     </div>
                 </div>
+                <form action="{% url 'user_logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="button is-danger">Logout</button>
+                </form>
             </div>
         </div>
     </section>

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from registration.views import register
-from weather.views import index
+from weather.views import index, user_logout
 from forecast.views import details
 
 urlpatterns = [
@@ -26,4 +26,5 @@ urlpatterns = [
     path('register/', include("registration.urls")),
     path('weather/', include("weather.urls")),  # Include the weather app's URLs with a prefix
     path('forecast/', include('forecast.urls')),
+    path('logout/', user_logout, name = 'user_logout')
 ]

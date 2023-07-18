@@ -5,6 +5,7 @@ from .models import City
 from django.contrib.auth.models import User
 from .forms import CityForm, DeleteCityForm
 from django.http import JsonResponse
+from django.contrib.auth import logout
 
 # Create your views here.
 def get_html_content(location_data):
@@ -102,3 +103,7 @@ def index(request):
         return render(request, 'weather/weather_data.html', context) # Renders only the weather data section
 
     return render(request, 'weather/index.html', context)
+
+def user_logout(request):
+    logout(request)
+    return redirect('landing_page')

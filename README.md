@@ -44,7 +44,7 @@ The application consists of three main components:
 ## Setup
 
 1. Clone the repository to your local machine.
-2. Install the required Python packages using `pip`:
+2. Install the required Python packages using `pip install python-decouple beautifulsoup4 requests`:
 3. Create a virtual environment (optional but recommended).
 4. Obtain an API key from OpenWeatherMap by signing up on their website.
 5. Replace the `api_key` variable in `forecast.views` and `weather.views` with your valid API key.

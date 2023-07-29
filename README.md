@@ -14,7 +14,7 @@ A web application that provides weather forecast information for different citie
 
 ## Overview
 
-The Weather Forecast App is a Django-based web application that allows users to view weather forecasts for their current location and other cities. It uses data from the OpenWeatherMap API to provide accurate weather information.
+The Weather Forecast App is a Django-based web application that allows users to view weather forecasts for their current location and other cities. It uses data from the OpenWeatherMap API and Web Scraping to provide accurate weather information.
 
 The application consists of three main components:
 

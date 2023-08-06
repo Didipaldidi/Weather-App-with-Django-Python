@@ -19,10 +19,13 @@ The Weather Forecast App is a Django-based web application that allows users to 
 The application consists of three main components:
 
 1. **`weather.views`**: Handles the main weather view, displaying the weather for the user's current location and other cities added by the user. It also allows users to add and delete cities from their list.
+   ![image](https://github.com/Didipaldidi/Weather-App-with-Django-Python/assets/64215294/ddb2ab2f-1837-4f21-a55d-f0a4aafd362a)
 
 2. **`registration.views`**: Manages user registration and login functionality. Users can register with a username and password or log in with their existing credentials.
+   ![image](https://github.com/Didipaldidi/Weather-App-with-Django-Python/assets/64215294/2378cc1c-6539-4ecb-9a9c-56ff0cf9ffd8)
 
 3. **`forecast.views`**: Retrieves weather forecast data for a specific city using the OpenWeatherMap API. It provides detailed weather forecasts for the next 5 days.
+   ![image](https://github.com/Didipaldidi/Weather-App-with-Django-Python/assets/64215294/119d58d6-5ff5-41ad-9838-05082fcab3cd)
 
 ## Features
 

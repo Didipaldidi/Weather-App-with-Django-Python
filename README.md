@@ -38,11 +38,13 @@ The application consists of three main components:
 
 - Python
 - Django
+- BeautifulSoup
 - HTML
 - CSS
 - JavaScript
 - Bootstrap
 - OpenWeatherMap API
+
 
 ## Setup
 
